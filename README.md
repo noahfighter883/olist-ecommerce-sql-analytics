@@ -4,14 +4,31 @@ A portfolio project analyzing 100k real Brazilian e-commerce orders (2016 to 201
 using Postgres. It covers revenue trends, customer segmentation (RFM), seller
 performance, and how delivery delays relate to review scores.
 
-See [FINDINGS.md](./FINDINGS.md) for the write-up of what the data actually showed.
+Full write-up: [FINDINGS.md](./FINDINGS.md)
+
+A couple of highlights: revenue has a clear Black Friday spike in November 2017, and
+late deliveries drop the average review score from 4.29 to 2.57, a bigger swing than
+you'd expect from timing alone.
 
 ## Stack
 - **Data:** [Olist Brazilian E-Commerce dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) (Kaggle, 9 CSVs, about 52 columns)
 - **Database:** Supabase (hosted Postgres, free tier)
 - **Analysis:** SQL only, no other tools. Joins across 8 related tables, window functions, CTEs.
 
-## Setup
+## What's in this repo
+- `01_schema.sql`, table definitions, matching what's actually live in the database
+- `02_queries.sql`, all the analysis queries, tiered by difficulty
+- `FINDINGS.md`, the write-up of what came out of running these queries
+- `.gitignore`, keeps the raw CSVs out of the repo since they're not mine to redistribute
+
+## Possible next steps
+A small Next.js page that runs a couple of these queries live against Supabase and
+renders a chart or two would turn this from "queries in a repo" into something with a
+live URL, similar to how the DynastyEvaluator project works.
+
+---
+
+## Setup (if you want to reproduce this)
 
 ### 1. Get the data
 Download the CSVs from Kaggle (you'll need a free Kaggle account):
@@ -67,14 +84,3 @@ back to the Portuguese name when there's no English translation.
 
 Run them in the Supabase SQL Editor, or straight in `psql` if you're already connected
 from the load step above.
-
-## What's in this repo
-- `01_schema.sql`, table definitions, matching what's actually live in the database
-- `02_queries.sql`, all the analysis queries, tiered by difficulty
-- `FINDINGS.md`, the write-up of what came out of running these queries
-- `.gitignore`, keeps the raw CSVs out of the repo since they're not mine to redistribute
-
-## Possible next steps
-A small Next.js page that runs a couple of these queries live against Supabase and
-renders a chart or two would turn this from "queries in a repo" into something with a
-live URL, similar to how the DynastyEvaluator project works.
